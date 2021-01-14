@@ -22,6 +22,30 @@ class Quiz(models.Model):
     class Meta:
         verbose_name_plural = "Quizzes"
         
-class Question(models.Model):
+class Update(models.Model):
+    updated = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        abstract = True 
+
+class Question(Update):
+    SCALE = (
+        (0, "Beginner"),
+        (1, "Intermediate"),
+        (2, "Advanced")
+    )
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, verbose_name="question")
+    diffuculty = models.IntegerField(choices=SCALE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.title
+    
+class Answer(Update):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    answer_text = models.CharField(max_length=250)
+    is_right = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.answer_text
