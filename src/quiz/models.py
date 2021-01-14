@@ -9,6 +9,9 @@ class Category(models.Model):
         
     def __str__(self):
         return self.name
+    @property
+    def quiz_count(self):
+        return self.quiz_set.count()
     
     
 class Quiz(models.Model):
@@ -21,6 +24,9 @@ class Quiz(models.Model):
     
     class Meta:
         verbose_name_plural = "Quizzes"
+     @property   
+    def question_count(self):
+        return self.question_set.count()
         
 class Update(models.Model):
     updated = models.DateTimeField(auto_now=True)
