@@ -4,6 +4,7 @@ from .models import Category, Quiz, Question, Answer
 
 class AnswerInline(nested_admin.NestedTabularInline):
     model = Answer
+    extra = 4
     
 class QuestionInline(nested_admin.NestedTabularInline):
     model = Question

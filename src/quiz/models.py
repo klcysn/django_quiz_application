@@ -24,7 +24,7 @@ class Quiz(models.Model):
     
     class Meta:
         verbose_name_plural = "Quizzes"
-     @property   
+    @property   
     def question_count(self):
         return self.question_set.count()
         
