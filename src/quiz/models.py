@@ -42,7 +42,7 @@ class Question(Update):
     )
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, verbose_name="question")
-    diffuculty = models.IntegerField(choices=SCALE)
+    difficulty = models.IntegerField(choices=SCALE)
     date_created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
