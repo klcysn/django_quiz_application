@@ -2,16 +2,19 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Category, Quiz, Question
 from .serializers import CategorySerializer, CategoryDetailSerializer, QuestionSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 # Create your views here.
 
 class CategoryList(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    permission_classes = [AllowAny]
     
     
 class CategoryDetail(generics.ListAPIView):
     serializer_class = CategoryDetailSerializer
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         queryset = Quiz.objects.all()
@@ -21,6 +24,7 @@ class CategoryDetail(generics.ListAPIView):
     
 class QuizDetail(generics.ListAPIView):
     serializer_class = QuestionSerializer
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         queryset = Question.objects.all()
